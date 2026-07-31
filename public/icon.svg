@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#FAF7F0"/>
+  <!-- a calibration curve: the diagonal of perfect calibration, and a line finding it -->
+  <path d="M112 400 L400 112" stroke="#D8D3C5" stroke-width="16" stroke-linecap="round" stroke-dasharray="4 34"/>
+  <path d="M112 400 C 180 330, 210 250, 256 216 C 310 176, 350 160, 400 112"
+        fill="none" stroke="#4A6F63" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="112" cy="400" r="22" fill="#2C2A24"/>
+  <circle cx="256" cy="216" r="22" fill="#2C2A24"/>
+  <circle cx="400" cy="112" r="22" fill="#2C2A24"/>
+</svg>

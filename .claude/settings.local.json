@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
+      "PowerShell(python \"C:\\\\Users\\\\negih\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-negih-Downloads-productivity-app\\\\874b5c33-92fa-4869-94be-589e8518ab19\\\\scratchpad\\\\gen_icons.py\")",
+      "PowerShell(npm install --no-audit --no-fund 2>&1)",
+      "PowerShell(npx vitest run --reporter=basic 2>&1)",
+      "PowerShell(npx tsc -b --pretty false 2>&1)",
+      "PowerShell(npm run build 2>&1)"
+    ]
+  }
+}
