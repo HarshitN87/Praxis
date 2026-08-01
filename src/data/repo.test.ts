@@ -13,9 +13,16 @@ describe('seeding', () => {
     const s = await repo.getSettings();
     expect(s.id).toBe('singleton');
     expect(s.dayBoundaryHour).toBe(4);
-    // F31 — the daily reminder defaults ON, because a daily module cannot
-    // run on the spec's one-per-week cap.
-    expect(s.dailyReminderEnabled).toBe(true);
+
+    // Optional modules start OFF, per §4.6-4.9 and Phase 6/7 of the build
+    // map. Shipping them all on buried the core loop under four screens most
+    // people never open.
+    expect(s.modules).toEqual({
+      systemsMap: false,
+      reframing: false,
+      strategicSketch: false,
+      habitLoops: false,
+    });
 
     const cats = await repo.listCategories();
     expect(cats.length).toBeGreaterThan(0);

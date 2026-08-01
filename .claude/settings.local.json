@@ -6,7 +6,10 @@
       "PowerShell(npm install --no-audit --no-fund 2>&1)",
       "PowerShell(npx vitest run --reporter=basic 2>&1)",
       "PowerShell(npx tsc -b --pretty false 2>&1)",
-      "PowerShell(npm run build 2>&1)"
+      "PowerShell(npm run build 2>&1)",
+      "PowerShell(Write-Output \"--- files in HEAD \\(count\\) ---\"; \\(git ls-tree -r HEAD --name-only | Measure-Object -Line\\).Lines; Write-Output \"--- sample ---\"; git ls-tree -r HEAD --name-only | Select-Object -First 30; Write-Output \"--- commit meta ---\"; git log -1 --format=\"%H%n%an <%ae>%n%ad%n%s\")",
+      "PowerShell(gh --version 2>&1)",
+      "PowerShell(gh auth status 2>&1)"
     ]
   }
 }

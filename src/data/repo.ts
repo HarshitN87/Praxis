@@ -58,7 +58,11 @@ export const DEFAULT_SETTINGS: Settings = {
   weeklyDigestEnabled: true,
   maxIntentionsPerDay: 5,
   softIntentionWarnAt: 3,
-  modules: { systemsMap: true, reframing: true, strategicSketch: true, habitLoops: true },
+  // Optional modules start OFF, as both §4.6-4.9 of the spec and Phase 6/7 of
+  // the build map require. Shipping them all on contradicted that and buried
+  // the two-job core loop under four things most people never open. They are
+  // one tap away on the More screen when a real need for them turns up.
+  modules: { systemsMap: false, reframing: false, strategicSketch: false, habitLoops: false },
   evaluationBaselineStartedAt: null,
   onboardedAt: null,
   createdAt: nowInstant(),

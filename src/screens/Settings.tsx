@@ -11,8 +11,8 @@ import {
   ScreenHead,
   Section,
   TextField,
-  Toggle,
 } from '../components/ui';
+import { Link } from 'react-router-dom';
 import { formatInstantHuman } from '../domain/dates';
 import type { Settings } from '../domain/types';
 
@@ -73,26 +73,12 @@ export default function SettingsScreen() {
         </Card>
       </Section>
 
-      <Section title="Reminders">
-        <Card>
-          <Toggle
-            label="Daily check-in reminder"
-            checked={settings.dailyReminderEnabled}
-            onChange={(v) => void setSettings({ dailyReminderEnabled: v })}
-            hint="The one notification Praxis sends. The intention loop needs a daily prompt to work at all."
-          />
-          <Toggle
-            label="Weekly summary"
-            checked={settings.weeklyDigestEnabled}
-            onChange={(v) => void setSettings({ weeklyDigestEnabled: v })}
-          />
-          <Notice kind="plain">
-            At most one notification a day, plus one weekly summary. No streak reminders, no
-            re-engagement nudges, no badge counters. There is nothing here that benefits from you
-            opening the app more often.
-          </Notice>
-        </Card>
-      </Section>
+      {/* The reminder toggles that used to sit here have been removed. They
+          set a stored flag that nothing read, so they were two switches that
+          did nothing — worse than absent, because they implied the evening
+          check-in would prompt you and it never did. A web app cannot fire a
+          notification while closed without a push service; see IMPROVEMENTS.md
+          for the two real options. */}
 
       <Section title="How many intentions a day">
         <Card className="stack">
@@ -158,29 +144,11 @@ export default function SettingsScreen() {
       </Section>
 
       <Section title="Optional modules">
-        <Card>
-          <Toggle
-            label="Systems map"
-            checked={settings.modules.systemsMap}
-            onChange={(v) => void setSettings({ modules: { ...settings.modules, systemsMap: v } })}
-          />
-          <Toggle
-            label="Habit loops"
-            checked={settings.modules.habitLoops}
-            onChange={(v) => void setSettings({ modules: { ...settings.modules, habitLoops: v } })}
-          />
-          <Toggle
-            label="Expectation reframing"
-            checked={settings.modules.reframing}
-            onChange={(v) => void setSettings({ modules: { ...settings.modules, reframing: v } })}
-          />
-          <Toggle
-            label="Strategic sketch"
-            checked={settings.modules.strategicSketch}
-            onChange={(v) =>
-              void setSettings({ modules: { ...settings.modules, strategicSketch: v } })
-            }
-          />
+        <Card className="flat">
+          <p className="prose" style={{ marginTop: 0 }}>
+            Turn these on and off from <Link to="/more">More</Link>, where each one says what it
+            is actually for before you commit to it.
+          </p>
           <p className="hint">
             The intention, action and decision tiers cannot be switched off — they are the one
             thing feeding the calibration engine.
