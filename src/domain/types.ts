@@ -417,8 +417,12 @@ export interface GameSketch {
 /** SETTINGS                                                         */
 /** ---------------------------------------------------------------- */
 
+export type ThemePreference = 'auto' | 'light' | 'dark';
+
 export interface Settings {
   id: 'singleton';
+  /** 'auto' follows the device. Dark is the one most evening check-ins land in. */
+  theme: ThemePreference;
   timezone: string;
   /** Day starts at 04:00 local by default — late nights shouldn't split a day. */
   dayBoundaryHour: number;

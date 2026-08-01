@@ -38,52 +38,52 @@ export function ProbabilityInput({
   const k = probabilityToOutOfTen(value);
 
   return (
-    <div className="stack-sm">
-      <label className="label">{question}</label>
-      <p className="hint" style={{ marginTop: 0, marginBottom: 8 }}>
-        Out of 10 times in a situation like this, how many go this way?
-      </p>
+    <div className="prob">
+      <div>
+        <label className="label" style={{ marginBottom: 4 }}>
+          {question}
+        </label>
+        <p className="hint" style={{ marginTop: 0 }}>
+          Out of 10 times in a situation like this, how many go this way?
+        </p>
+      </div>
 
       {!fine ? (
-        <div className="pills" role="group" aria-label="Out of ten">
+        <div className="prob-track" role="group" aria-label="Out of ten">
           {Array.from({ length: 11 }, (_, i) => i).map((n) => (
             <button
               key={n}
               type="button"
-              className="pill"
+              className={`prob-seg${n === k ? ' selected' : n < k ? ' filled' : ''}`}
               aria-pressed={k === n}
+              aria-label={`${n} out of 10`}
               autoFocus={autoFocus && n === 5}
               onClick={() => onChange(outOfTenToProbability(n))}
-              style={{ minWidth: 44, paddingInline: 12 }}
             >
               {n}
             </button>
           ))}
         </div>
       ) : (
-        <div>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={Math.round(value * 100)}
-            onChange={(e) => onChange(Number(e.target.value) / 100)}
-            style={{ width: '100%' }}
-            aria-label="Probability percent"
-          />
-        </div>
+        <input
+          type="range"
+          className="prob-range"
+          min={0}
+          max={100}
+          step={1}
+          value={Math.round(value * 100)}
+          onChange={(e) => onChange(Number(e.target.value) / 100)}
+          aria-label="Probability percent"
+        />
       )}
 
-      <div className="row-between" style={{ marginTop: 4 }}>
+      <div className="prob-readout">
         <div>
-          <span className="stat-value">{formatProbability(value)}</span>{' '}
-          <span className="muted" style={{ fontSize: 13 }}>
-            — about {formatAsFrequency(value)}
-          </span>
+          <span className="prob-value">{formatProbability(value)}</span>{' '}
+          <span className="prob-gloss">— about {formatAsFrequency(value)}</span>
         </div>
         <button type="button" className="btn ghost sm" onClick={() => setFine((f) => !f)}>
-          {fine ? 'Back to tenths' : 'Finer'}
+          {fine ? 'Tenths' : 'Finer'}
         </button>
       </div>
 

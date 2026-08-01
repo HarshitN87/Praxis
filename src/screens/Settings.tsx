@@ -14,6 +14,7 @@ import {
   Toggle,
 } from '../components/ui';
 import { formatInstantHuman } from '../domain/dates';
+import type { Settings } from '../domain/types';
 
 export default function SettingsScreen() {
   const { settings, setSettings, categories, reloadCategories, refresh, all } = useStore();
@@ -24,6 +25,25 @@ export default function SettingsScreen() {
   return (
     <>
       <ScreenHead title="Settings" />
+
+      <Section title="Appearance">
+        <Card>
+          <Field
+            label="Theme"
+            hint="Auto follows your device. The evening check-in usually happens after dark, which is what dark mode is really for here."
+          >
+            <PillGroup
+              options={[
+                { value: 'auto', label: 'Auto' },
+                { value: 'light', label: 'Light' },
+                { value: 'dark', label: 'Dark' },
+              ]}
+              value={settings.theme}
+              onChange={(v) => void setSettings({ theme: v as Settings['theme'] })}
+            />
+          </Field>
+        </Card>
+      </Section>
 
       <Section title="Your day">
         <Card className="stack">
