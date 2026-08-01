@@ -145,6 +145,51 @@ src/
 matters is pure functions over plain data, which is why it can be tested
 exhaustively and why swapping the storage backend later is contained.
 
+### Visual system
+
+`src/styles.css` is the whole design system. The brief from §3.3 is "a quiet
+notebook, not a dashboard", and §1.1 rules out gamification — so it pursues
+beauty through typography, rhythm, paper and depth rather than through colour
+and reward. Two rules it never breaks:
+
+- **No celebratory colour.** Hitting a target and missing one render with
+  identical weight (fault F11). Green is the interface accent, not a verdict.
+- **"Not enough data yet" is designed to look deliberate**, not broken. It is
+  the honest answer most of the time in the first month.
+
+Specifics worth knowing:
+
+- **Fonts are chosen against what is actually installed**, not aspirationally.
+  The original stack led with `Inter` and `Iowan Old Style`, neither of which
+  exists on Windows, so it silently fell through to Palatino Linotype and plain
+  Segoe UI. It now leads with Sitka Text (Matthew Carter, optically sized for
+  reading) and Segoe UI Variable Text on Windows, and Iowan Old Style /
+  `-apple-system` on Apple platforms. No webfonts — an offline-first app should
+  not need a network request to render its own text.
+- **Light and dark**, set in Settings → Appearance, defaulting to the device.
+  Dark is not a cold grey; it is warm ink-on-night, because the evening
+  check-in defaults to 8pm and that is where most of the daily loop is read.
+- **Contrast is measured, not eyeballed.** Every token pair clears WCAG AA in
+  both themes. `--ink-2` is tuned against `--paper-2` rather than `--paper`,
+  because secondary text sits on cards far more often than on the page, and
+  that is the tighter constraint.
+- **The probability control** is the signature interaction — every prediction
+  at every tier is entered through it — so it is drawn as an instrument: a
+  segmented track that reads as a quantity ("8 out of 10") with the value set
+  in the serif at display size.
+- **The calibration chart** shades the area between your curve and the
+  diagonal. The eye reads "how far off, and in which direction" from the shape
+  long before it parses the numbers. It is a single neutral tint: being
+  overconfident is not styled as worse-looking than being underconfident.
+
+### Failure
+
+`ErrorBoundary` wraps the whole app, outside the store, so a failure to open or
+read the database still renders something. A blank screen is the worst possible
+failure mode here — the local database is the only copy — so the boundary keeps
+the one action that matters reachable: **Export my data**, which reads the
+database directly rather than through the screen that just failed.
+
 ### Data
 
 Everything lives in IndexedDB on your device. No account, no server, no

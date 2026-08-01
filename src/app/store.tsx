@@ -68,6 +68,25 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  /**
+   * Apply the theme to the document root. 'auto' removes the attribute so the
+   * prefers-color-scheme block in styles.css takes over, and the browser
+   * chrome colour is kept in step so the PWA's status bar matches the page.
+   */
+  useEffect(() => {
+    const root = document.documentElement;
+    if (settings.theme === 'auto') delete root.dataset.theme;
+    else root.dataset.theme = settings.theme;
+
+    const dark =
+      settings.theme === 'dark' ||
+      (settings.theme === 'auto' &&
+        window.matchMedia?.('(prefers-color-scheme: dark)').matches);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', dark ? '#15140f' : '#faf7f0');
+  }, [settings.theme]);
+
   const reloadCategories = useCallback(async () => {
     setCategories(await repo.listCategories());
   }, []);

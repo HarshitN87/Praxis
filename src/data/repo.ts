@@ -45,6 +45,7 @@ import { addDays, nowInstant, systemTimezone, today as todayFor } from '../domai
 
 export const DEFAULT_SETTINGS: Settings = {
   id: 'singleton',
+  theme: 'auto',
   timezone: 'UTC',
   dayBoundaryHour: 4,
   checkinHour: 20,
